@@ -78,5 +78,12 @@ while True:
 	# BGR -> RGB
 	preds = fa.get_landmarks(frame[..., ::-1])
 	print(preds)
-	im = visualize_landmarks(frame, preds[0])
-	cv2.imwrite("sample.png", im)
+	# im = visualize_landmarks(frame, preds[0])
+	# cv2.imwrite("sample.png", im)
+	if math.dist(preds[0][62], preds[0][66]) < 4:
+		silent.append(frame)
+	else:
+		speaking.append(frame)
+
+create_video_from_frames(silent, "silent.avi")
+create_video_from_frames(speaking, "speaking.avi")
